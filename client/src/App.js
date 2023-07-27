@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MasterLayout from './layouts/admin/MasterLayout';
 import Dashboard from './components/admin/Dashboard';
-import Login from './components/frontend/auth/Login';
-import Register from './components/frontend/auth/Register';
+import Login from './layouts/auth/Login';
+import Register from './layouts/auth/Register';
 
 function App() {
   return (
