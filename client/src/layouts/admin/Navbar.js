@@ -4,7 +4,7 @@ import { HiOutlineLogout, HiOutlineSearch } from "react-icons/hi";
 
 const Navbar = () => {
   return (
-    <div className="fixed w-full flex items-center justify-between h-14 text-gray-900 z-10">
+    <div className="fixed shadow-md w-full flex items-center justify-between h-14 text-gray-900 z-10">
       <div className="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-white border-none">
         <img
           className="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden"
