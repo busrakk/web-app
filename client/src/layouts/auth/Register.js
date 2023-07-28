@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../components/elements/Logo";
 import { HiOutlineUserAdd } from "react-icons/hi";
 import { AiOutlineLock } from "react-icons/ai";
@@ -6,12 +7,58 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { HiOutlineUser } from "react-icons/hi";
 import { BsBoxArrowInLeft } from "react-icons/bs";
 import { Carousel } from "antd";
+import swal from "sweetalert";
+import axios from "axios";
+import { TailSpin } from "react-loader-spinner";
 import AuthCarousel from "../../components/auth/AuthCarousel";
 import slider1 from "../../assets/images/slider1.png";
 import slider2 from "../../assets/images/slider2.png";
 import slider3 from "../../assets/images/slider3.png";
 
 const Register = () => {
+  const navigate = useNavigate();
+
+  const [registerInput, setRegister] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    error_list: [],
+    isLoading: false,
+  });
+
+  const handleInput = (e) => {
+    e.persist();
+    setRegister({ ...registerInput, [e.target.name]: e.target.value });
+  };
+
+  const registerSubmit = (e) => {
+    e.preventDefault();
+    setRegister({ ...registerInput, isLoading: true });
+    const data = {
+      name: registerInput.name,
+      email: registerInput.email,
+      password: registerInput.password,
+      password_confirmation: registerInput.password_confirmation,
+    };
+
+    axios.get("/sanctum/csrf-cookie").then((response) => {
+      axios.post("/api/register", data).then((res) => {
+        if (res.data.success) {
+          localStorage.setItem("auth_token", res.data.token);
+          localStorage.setItem("auth_name", res.data.username);
+          swal("Success", res.data.message, "success");
+          setTimeout(() => {
+            navigate("/");
+          }, "1500");
+        } else {
+          if (res.data.status === "validation-error") {
+            setRegister({ ...registerInput, error_list: res.data.errors });
+          }
+        }
+      });
+    });
+  };
   return (
     <div className="h-screen xl:mx-48">
       <div className="flex justify-between h-full">
@@ -19,15 +66,9 @@ const Register = () => {
           <div className="w-full h-full flex items-center">
             <div className="w-full">
               <Carousel className="!h-full px-6" autoplay>
-                <AuthCarousel
-                  img={slider1}
-                />
-                <AuthCarousel
-                  img={slider2}
-                />
-                <AuthCarousel
-                  img={slider3}
-                />
+                <AuthCarousel img={slider1} />
+                <AuthCarousel img={slider2} />
+                <AuthCarousel img={slider3} />
               </Carousel>
             </div>
           </div>
@@ -37,7 +78,7 @@ const Register = () => {
             <Logo />
           </h1>
           <div className="flex justify-center">
-          <div className="flex flex-col bg-white px-4 sm:px-2 md:px-4 lg:px-6 py-2 rounded-md w-full max-w-md">
+            <div className="flex flex-col bg-white px-4 sm:px-2 md:px-4 lg:px-6 py-2 rounded-md w-full max-w-md">
               <div className="inline-flex justify-center">
                 <div className="inline-flex flex-row items-center">
                   <span className="leading-2 text-gray-800 text-fontmd font-bold ml-1 uppercase">
@@ -50,7 +91,7 @@ const Register = () => {
                 Welly’s giriş yap veya hesap oluştur, yemekleri keşfet!
               </div>
               <div className="rounded-md bg-white w-full max-w-sm sm:max-w-md border border-gray-200 shadow-md px-4 py-4 sm:p-8">
-                <form>
+                <form onSubmit={registerSubmit}>
                   <div className="flex flex-col mb-4">
                     <label
                       htmlFor="name"
@@ -70,8 +111,13 @@ const Register = () => {
                         className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-indigo-400"
                         placeholder="İsim"
                         required
+                        onChange={handleInput}
+                        value={registerInput.name}
                       />
                     </div>
+                    <span className="text-red-500 text-sm">
+                      {registerInput.error_list.name}
+                    </span>
                   </div>
                   <div className="flex flex-col mb-4">
                     <label
@@ -92,8 +138,13 @@ const Register = () => {
                         className="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-indigo-400"
                         placeholder="E-Posta Adresi"
                         required
+                        onChange={handleInput}
+                        value={registerInput.email}
                       />
                     </div>
+                    <span className="text-red-500 text-sm">
+                      {registerInput.error_list.email}
+                    </span>
                   </div>
                   <div className="flex flex-col mb-4">
                     <label
@@ -117,8 +168,13 @@ const Register = () => {
                         placeholder="Şifre"
                         required
                         autoComplete="on"
+                        onChange={handleInput}
+                        value={registerInput.password}
                       />
                     </div>
+                    <span className="text-red-500 text-sm">
+                      {registerInput.error_list.password}
+                    </span>
                   </div>
                   <div className="flex flex-col mb-4">
                     <label
@@ -142,8 +198,13 @@ const Register = () => {
                         placeholder="Şifreyi Onayla"
                         required
                         autoComplete="on"
+                        onChange={handleInput}
+                        value={registerInput.password_confirmation}
                       />
                     </div>
+                    <span className="text-red-500 text-sm">
+                      {registerInput.error_list.password_confirmation}
+                    </span>
                   </div>
 
                   <div className="flex w-full mt-6">
@@ -157,6 +218,24 @@ const Register = () => {
                       </span>
                     </button>
                   </div>
+                  {registerInput.isLoading && (
+                    <div className="flex justify-center pt-2">
+                      <div>
+                        <span>
+                          <TailSpin
+                            height="40"
+                            width="40"
+                            color="#6D7AF5"
+                            ariaLabel="tail-spin-loading"
+                            radius="1"
+                            wrapperStyle={{}}
+                            wrapperclassName=""
+                            visible={true}
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </form>
               </div>
             </div>

@@ -1,8 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import swal from "sweetalert";
 import { HiOutlineLogout, HiOutlineSearch } from "react-icons/hi";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const handleLogout = (e) => {
+    e.preventDefault();
+    axios.post("/api/logout").then((res) => {
+      if (res.data.success) {
+        localStorage.removeItem("auth_token");
+        localStorage.removeItem("auth_name");
+        swal("Success", res.data.message, "success");
+        navigate("/login");
+      }
+    });
+  };
   return (
     <div className="fixed shadow-md w-full flex items-center justify-between h-14 text-gray-900 z-10">
       <div className="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-white border-none">
@@ -36,6 +50,7 @@ const Navbar = () => {
           <li>
             <Link
               to="#"
+              onClick={handleLogout}
               className="flex items-center mr-4 hover:text-indigo-600"
             >
               <span className="inline-flex mr-1">
