@@ -7,9 +7,9 @@ const Product = () => {
     <div className="h-full ml-14 mt-20 mb-10 md:ml-64">
       <div className="mt-4 text-fontlg font-semibold flex justify-between md:mx-24 mx-10">
         <span>Yemekler</span>
-        <button class="flex items-center px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-violet-600 rounded-lg md:text-fontmd text-fontsm hover:bg-violet-500 focus:outline-none focus:ring focus:ring-violet-300 focus:ring-opacity-80">
-          <MdAddCircleOutline size={28} class="w-5 h-5 mx-1" />
-          <span class="mx-1">Ekle</span>
+        <button className="flex items-center px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-violet-600 rounded-lg md:text-fontmd text-fontsm hover:bg-violet-500 focus:outline-none focus:ring focus:ring-violet-300 focus:ring-opacity-80">
+          <MdAddCircleOutline size={28} className="w-5 h-5 mx-1" />
+          <span className="mx-1">Ekle</span>
         </button>
       </div>
       <div className="md:mx-20 grid grid-cols-1 lg:grid-cols-3 p-4 gap-4">

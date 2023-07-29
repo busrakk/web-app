@@ -79,7 +79,7 @@ const Category = () => {
   };
 
   const handleModal = (newCategoryId = 0) => {
-    setShowUpdate(true)
+    setShowUpdate(true);
     setCategoryId(newCategoryId);
   };
 
@@ -89,7 +89,7 @@ const Category = () => {
       view.push(
         <tr key={item.id} className="hover:bg-gray-50">
           <td className="px-6 py-4">{item.name}</td>
-          <td className="px-6 py-4">
+          <td className="px-6 py-4 hidden md:block">
             {item.status === 1 ? (
               <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600">
                 <span className="h-1.5 w-1.5 rounded-full bg-green-600"></span>
@@ -144,8 +144,9 @@ const Category = () => {
         </button>
       </div>
       {show && <Add setShow={setShow} />}
-      {showUpdate && <Update categoryId={categoryId} setShowUpdate={setShowUpdate} />}
-
+      {showUpdate && (
+        <Update categoryId={categoryId} setShowUpdate={setShowUpdate} />
+      )}
       <div className="flex justify-center">
         <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 w-3/4">
           <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
