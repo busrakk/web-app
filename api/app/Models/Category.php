@@ -13,7 +13,6 @@ class Category extends Model
     const STATUS_INACTIVE = 0;
     
     protected $fillable = [
-        'slug',
         'name',
         'status',
     ];

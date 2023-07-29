@@ -29,7 +29,6 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'slug' => 'bail|required|max:191',
             'name' => 'bail|required|max:191',
         ]);
 
@@ -42,7 +41,6 @@ class CategoryController extends Controller
         }
 
         $data = [
-            'slug' => $request->slug,
             'name' => $request->name,
             'status' => $request->status == true ? '1':'0'
         ];
@@ -52,7 +50,6 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'slug' => 'bail|required|max:191',
             'name' => 'bail|required|max:191',
 
         ]);
@@ -66,7 +63,6 @@ class CategoryController extends Controller
         }
 
         $data = [
-            'slug' => $request->slug,
             'name' => $request->name,
             'status' => $request->status == true ? '1':'0'
         ];
