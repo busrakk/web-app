@@ -12,10 +12,12 @@ import Category from "./components/admin/category";
 import Product from "./components/admin/product";
 import Users from "./components/admin/user";
 import axios from "axios";
-// import Page404 from "./layouts/error/Page404";
+import Page404 from "./layouts/error/Page404";
 import AdminRoute from "./protectedRoute/AdminRoute";
+import Master from "./layouts/frontend/Master";
+import Home from "./components/frontend/Home";
 
-axios.defaults.baseURL = "http://127.0.0.1:8000";
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_ROOT_URL;;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.post["Accept"] = "application/json";
 axios.defaults.withCredentials = true;
@@ -33,7 +35,9 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
+          <Route path="/" element={<Master />}>
+            <Route path="" element={<Home />} />
+          </Route>
           <Route path="/admin/" element={<AdminRoute />}>
             <Route
               path=""
@@ -44,7 +48,7 @@ function App() {
             <Route path="product" element={<Product />} />
             <Route path="users" element={<Users />} />
           </Route>
-          {/* <Route path="*" element={<Page404 />} /> */}
+           <Route path="*" element={<Page404 />} /> 
         </Routes>
       </Router>
     </>
