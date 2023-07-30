@@ -47,3 +47,21 @@ export const productUpdateApi = async (id, payload = []) => {
 export const productDeleteApi = async (id, payload = []) => {
   return sendRequest(POST, `/api/admin/product-delete/${id}`, payload);
 };
+
+// user
+export const userListApi = async (payload = []) => {
+  return sendRequest(POST, "/api/admin/user-list", payload);
+};
+
+export const userUpdateApi = async (id, payload = []) => {
+  return sendRequest(POST, `/api/admin/user-update/${id}`, payload);
+};
+
+export const userDeleteApi = async (id, payload = []) => {
+  return sendRequest(POST, `/api/admin/user-delete/${id}`, payload);
+};
+
+export const userFindApi = async (id, payload = []) => {
+  return sendRequest(POST, `/api/admin/user/${id}`, payload);
+};
+

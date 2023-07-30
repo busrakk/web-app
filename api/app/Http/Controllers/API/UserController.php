@@ -42,7 +42,7 @@ class UserController extends Controller
 
         $data = [
             'name' => $request->name,
-            'role_as' => $request->role_as == 'admin' ? '1' : '0',
+            'role_as' => $request->role_as == true ? '1' : '0',
             'status' => $request->status == true ? '1':'0'
         ];
 
