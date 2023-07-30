@@ -31,4 +31,9 @@ class CategoryRepositoryEloquent implements CategoryRepository{
         return Category::where('id', $id)->delete();
     }
 
+    public function getByWhere($column=['*'], $where)
+    {
+        return Category::select($column)->where($where)->get();
+    }
+
 }

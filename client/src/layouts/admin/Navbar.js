@@ -18,7 +18,7 @@ const Navbar = () => {
     });
   };
   return (
-    <div className="fixed shadow-md w-full flex items-center justify-between h-14 text-gray-900 z-10">
+    <div className="fixed shadow-md w-full flex items-center justify-between h-14 text-gray-900 z-50">
       <div className="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-white border-none">
         <img
           className="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden"
@@ -27,7 +27,7 @@ const Navbar = () => {
         />
         <span className="hidden md:block">ADMIN DASHBOARD</span>
       </div>
-      <div className="flex justify-between items-center h-14 bg-white  header-right">
+      <div className="flex justify-between items-center h-14 bg-white">
         <div className="bg-white rounded flex items-center w-full max-w-xl mr-4 p-2 shadow-sm border border-gray-200">
           <button className="outline-none focus:outline-none">
             <HiOutlineSearch

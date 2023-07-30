@@ -2,6 +2,7 @@ import { sendRequest } from "./rootApi";
 // const GET = 'get';
 const POST = "post";
 
+// category
 export const categoryInsertApi = async (payload = []) => {
   return sendRequest(POST, "/api/admin/category-store", payload);
 };
@@ -20,4 +21,29 @@ export const categoryDeleteApi = async (id, payload = []) => {
 
 export const categoryFindApi = async (id, payload = []) => {
   return sendRequest(POST, `/api/admin/category/${id}`, payload);
+};
+
+export const categoryDropdownApi = async (payload = []) => {
+  return sendRequest(POST, '/api/admin/category-dropdown-list', payload);
+}
+
+// product
+export const productSaveApi = async (payload = []) => {
+  return sendRequest(POST, '/api/admin/product-save', payload);
+}
+
+export const productListApi = async (payload = []) => {
+  return sendRequest(POST, '/api/admin/product-list', payload);
+}
+
+export const productDetailsApi = async (payload = []) => {
+  return sendRequest(POST, `/api/admin/product-details`, payload);
+}
+
+export const productUpdateApi = async (id, payload = []) => {
+  return sendRequest(POST, `/api/admin/product-update/${id}`, payload);
+}
+
+export const productDeleteApi = async (id, payload = []) => {
+  return sendRequest(POST, `/api/admin/product-delete/${id}`, payload);
 };

@@ -34,7 +34,7 @@ class ProductController extends Controller
             'category' => 'bail|required',
             'name' => 'bail|required|max:191',
             'price' => 'bail|required|max:20',
-            'image' => 'bail|required|image|mimes:jpeg,png,jpg|max:2048',
+            //'image' => 'bail|required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -48,20 +48,19 @@ class ProductController extends Controller
         $data = [
             'category_id' => $request->category,
             'name' => $request->name,
+            'image' => $request->image,
             'description' => $request->description,
             'price' => $request->price,
             'featured' => $request->featured,
             'status' => $request->status
         ];
 
-        if($request->hasFile('image')){
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time(). '.' . $extension; 
-            $file->move('uploads/images/product/', $filename); 
-
-            $data['image'] = 'uploads/images/product/'.$filename;
-        }
+        // if($request->hasFile('image')){
+        //     $file = $request->file('image');
+        //     $filename = time() . '.' . $file->getClientOriginalExtension();
+        //     $file->move('uploads/images/product/', $filename);
+        //     $data['image'] = 'uploads/images/product/' . $filename;
+        // }
 
         return response()->json($this->productService->saveProduct($data));
 
@@ -72,11 +71,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'category' => 'bail|required',
             'name' => 'bail|required|max:191',
-            'meta_title' => 'bail|required|max:191',
-            'brand' => 'bail|required|max:20',
-            'selling_price' => 'bail|required|max:20',
             'price' => 'bail|required|max:20',
-            'quantity' => 'bail|required|max:4',
             // 'image' => 'bail|required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -91,20 +86,21 @@ class ProductController extends Controller
         $data = [
             'category_id' => $request->category,
             'name' => $request->name,
+            'image' => $request->image,
             'description' => $request->description,
-            'price' => $request->original_price,
+            'price' => $request->price,
             'featured' => $request->featured,
             'status' => $request->status
         ];
 
-        if($request->hasFile('image')){
-            $file = $request->file('image');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time(). '.' . $extension; 
-            $file->move('uploads/images/product/', $filename); 
+        // if($request->hasFile('image')){
+        //     $file = $request->file('image');
+        //     $extension = $file->getClientOriginalExtension();
+        //     $filename = time(). '.' . $extension; 
+        //     $file->move('uploads/images/product/', $filename); 
 
-            $data['image'] = 'uploads/images/product/'.$filename;
-        }
+        //     $data['image'] = 'uploads/images/product/'.$filename;
+        // }
         
         return response()->json($this->productService->updateProduct($data, $id));
 

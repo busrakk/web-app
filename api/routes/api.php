@@ -32,11 +32,13 @@ Route::middleware(['auth:sanctum', 'isAPIAdmin'])->group( function(){
         Route::post('category-update/{id}', 'CategoryController@update');
         Route::post('category-delete/{id}', 'CategoryController@destroy');
         Route::post('category/{id}', 'CategoryController@find');
+        Route::post('category-dropdown-list', 'CategoryController@getCategoryForDropdown');
         // Product route
         Route::post('product-save', 'ProductController@store');
         Route::post('product-update/{id}', 'ProductController@update');
         Route::post('product-list', 'ProductController@index');
         Route::post('product-details', 'ProductController@find');
+        Route::post('product-delete/{id}', 'ProductController@destroy');
     });
 });
 

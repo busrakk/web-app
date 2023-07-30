@@ -89,7 +89,7 @@ const Update = (props) => {
   };
 
   return (
-    <div className="fixed inset-x-0 inset-y-14 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
+    <div className="fixed inset-x-0 top-14 bottom-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
       <div className="p-2 rounded">
         <div className="flex justify-center">
           <div className="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 w-3/4">

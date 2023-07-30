@@ -155,7 +155,7 @@ const Category = () => {
                 <th scope="col" className="px-6 py-4 font-medium text-gray-900">
                   Kategori Adı
                 </th>
-                <th scope="col" className="px-6 py-4 font-medium text-gray-900">
+                <th scope="col" className="px-6 py-4 font-medium text-gray-900 hidden md:block">
                   Durum
                 </th>
                 <th

@@ -75,4 +75,9 @@ class CategoryController extends Controller
         return response()->json($this->categoryService->deleteCategory($id));
     }
 
+    public function getCategoryForDropdown()
+    {
+        return response()->json($this->categoryService->getCategoryForDropdown());
+    }
+
 }

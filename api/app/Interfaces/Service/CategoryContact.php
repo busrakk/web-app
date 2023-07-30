@@ -10,5 +10,5 @@ interface CategoryContact
     public function saveCategory($data);
     public function updateCategory($data, $id);
     public function deleteCategory($id);
-
+    public function getCategoryForDropdown();
 }

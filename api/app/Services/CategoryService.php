@@ -110,5 +110,15 @@ class CategoryService implements CategoryContact{
         }
     }
 
+    public function getCategoryForDropdown()
+    {
+        $response = $this->categoryRepository->getByWhere(['id', 'name'], [['status', Category::STATUS_ACTIVE]]);
 
+        return [
+            'data' => $response,
+            'success' => true,
+            'status' => 'success'
+        ];
+    }
+    
 }
