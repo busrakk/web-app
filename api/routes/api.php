@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,11 @@ Route::middleware(['auth:sanctum', 'isAPIAdmin'])->group( function(){
         Route::post('product-list', 'ProductController@index');
         Route::post('product-details', 'ProductController@find');
         Route::post('product-delete/{id}', 'ProductController@destroy');
+        //User route
+        Route::post('user-list', 'UserController@index');
+        Route::post('user-update/{id}', 'UserController@update');
+        Route::post('user-delete/{id}', 'UserController@destroy');
+        Route::post('user/{id}', 'UserController@find');
     });
 });
 
