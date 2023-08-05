@@ -48,6 +48,10 @@ export const productDeleteApi = async (id, payload = []) => {
   return sendRequest(POST, `/api/admin/product-delete/${id}`, payload);
 };
 
+export const productActiveListApi = async (payload = []) => {
+  return sendRequest(POST, '/api/get-featured-products', payload);
+}
+
 // user
 export const userListApi = async (payload = []) => {
   return sendRequest(POST, "/api/admin/user-list", payload);

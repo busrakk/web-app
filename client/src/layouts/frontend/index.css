@@ -3,5 +3,5 @@
 }
 
 .menu-item{
-    @apply md:mx-4 p-6 text-white cursor-pointer after:block md:after:w-0 md:after:translate-x-0 after:duration-300 after:h-0.5 md:after:ease-linear md:after:bg-white md:hover:after:inline-block hover:after:w-full hover:after:h-1 md:hover:after:bg-white bg-black py-4;
+    @apply md:mx-2 p-6 text-white cursor-pointer after:block md:after:w-0 md:after:translate-x-0 after:duration-300 after:h-0.5 md:after:ease-linear md:after:bg-white md:hover:after:inline-block hover:after:w-full hover:after:h-1 md:hover:after:bg-white bg-black md:py-0 py-4;
 }

@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
-
+import { productActiveListApi } from "../../service/serviceApi";
+import useDelayCallback from "../helpers/useDelayCallback";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 function NextBtn({ className, style, onClick }) {
   return (
     <button
-      className={`text-brand-color absolute top-1/2 -right-6 -translate-y-1/2`}
+      className={`text-brand-color absolute top-1/2 -right-10 -translate-y-1/2`}
       onClick={onClick}
     >
       <IoIosArrowForward size={28} />
@@ -26,6 +27,58 @@ function PrevBtn({ className, style, onClick }) {
 }
 
 const Menus = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [productList, setProductList] = useState([]);
+
+  useDelayCallback(() => {
+    getProductList();
+  }, []);
+
+  const getProductList = () => {
+    productActiveListApi().then((res) => {
+      if (res.data.success) {
+        if (res.data.status === "success") {
+          setIsLoading(false);
+          setProductList(res.data.data);
+        }
+      } else {
+        setProductList([]);
+      }
+    });
+  };
+
+  const renderTableData = () => {
+    let view = [];
+    productList.map((item) => {
+      view.push(
+        <div key={item.id} className="space-x-4">
+          <div className="w-full max-w-[360px] overflow-hidden rounded-lg shadow-lg">
+            <img
+              className="object-cover w-full h-96"
+              src={item.image}
+              alt={item.name}
+            />
+
+            <div className="py-5 text-center">
+              <div
+                className="block text-xl font-bold text-gray-800"
+                role="link"
+              >
+                {item.name}
+              </div>
+              <span className="text-sm text-gray-700">{item.price} $</span>
+            </div>
+          </div>
+        </div>
+      );
+      return view;
+    });
+    if (view.length === 0) {
+      return <div>No data found!</div>;
+    } else {
+      return view;
+    }
+  };
   const settings = {
     dots: false,
     infinite: true,
@@ -64,83 +117,12 @@ const Menus = () => {
   };
   return (
     <div className="mx-auto xl:px-40 md:pt-8">
-      <Slider className="md:-mx-2 flex justify-center items-center" {...settings}>
-        <div className="space-x-4">
-          <div className="w-full max-w-xs overflow-hidden rounded-lg shadow-lg">
-            <img
-              className="object-cover w-full h-96"
-              src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-              alt="avatar"
-            />
-
-            <div className="py-5 text-center">
-              <div
-                className="block text-xl font-bold text-gray-800"
-                role="link"
-              >
-                John Doe
-              </div>
-              <span className="text-sm text-gray-700">Software Engineer</span>
-            </div>
-          </div>
-        </div>
-        <div className="space-x-4 mr-4">
-          <div className="w-full max-w-xs overflow-hidden bg-white rounded-lg shadow-lg">
-            <img
-              className="object-cover w-full h-96"
-              src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-              alt="avatar"
-            />
-
-            <div className="py-5 text-center">
-              <div
-                className="block text-xl font-bold text-gray-800"
-                role="link"
-              >
-                John Doe
-              </div>
-              <span className="text-sm text-gray-700">Software Engineer</span>
-            </div>
-          </div>
-        </div>
-        <div className="space-x-4">
-          <div className="w-full max-w-xs overflow-hidden bg-white rounded-lg shadow-lg">
-            <img
-              className="object-cover w-full h-96"
-              src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-              alt="avatar"
-            />
-
-            <div className="py-5 text-center">
-              <div
-                className="block text-xl font-bold text-gray-800"
-                role="link"
-              >
-                John Doe
-              </div>
-              <span className="text-sm text-gray-700">Software Engineer</span>
-            </div>
-          </div>
-        </div>
-        <div className="space-x-4">
-          <div className="w-full max-w-xs overflow-hidden bg-white rounded-lg shadow-lg">
-            <img
-              className="object-cover w-full h-96"
-              src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-              alt="avatar"
-            />
-
-            <div className="py-5 text-center">
-              <div
-                className="block text-xl font-bold text-gray-800"
-                role="link"
-              >
-                John Doe
-              </div>
-              <span className="text-sm text-gray-700">Software Engineer</span>
-            </div>
-          </div>
-        </div>
+      <Slider
+        className="md:-mx-2 flex justify-center items-center"
+        {...settings}
+      >
+        {isLoading && <div>Loading</div>}
+        {!isLoading && renderTableData()}
       </Slider>
     </div>
   );
