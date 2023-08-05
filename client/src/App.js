@@ -15,7 +15,7 @@ import axios from "axios";
 import Page404 from "./layouts/error/Page404";
 import AdminRoute from "./protectedRoute/AdminRoute";
 import Master from "./layouts/frontend/Master";
-import Home from "./components/frontend/Home";
+import Home from "./components/frontend/sections/Home";
 
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND_ROOT_URL;;
 axios.defaults.headers.post["Content-Type"] = "application/json";
