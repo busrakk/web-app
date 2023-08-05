@@ -52,6 +52,10 @@ Route::middleware(['auth:sanctum'])->group( function(){
     Route::post('logout', [AuthController::class, 'logout']);
 });
 
+Route::group([ 'namespace' => 'App\Http\Controllers\API'], function(){
+    Route::post('get-featured-products', 'ProductController@getFeaturedProduct');
+});
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

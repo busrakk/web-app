@@ -10,4 +10,5 @@ interface ProductContact
     public function saveProduct($data);
     public function updateProduct($data, $id);
     public function deleteProduct($id);
+    public function getProductByWhere($where, $column=['*']);
 }

@@ -125,4 +125,9 @@ class ProductController extends Controller
         }
     }
 
+    public function getFeaturedProduct()
+    {
+        return response()->json($this->productService->getProductByWhere([['featured', Product::FEATURED_ACTIVE]], ['id', 'name', 'price', 'image']));
+    }
+
 }

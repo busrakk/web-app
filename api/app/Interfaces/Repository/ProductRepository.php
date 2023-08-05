@@ -10,4 +10,6 @@ interface ProductRepository
     public function insert($data);
     public function update($id, $data);
     public function deleteById($id);
+    public function getByWhere($column=['*'], $where);
+
 }

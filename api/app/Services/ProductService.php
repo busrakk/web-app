@@ -118,4 +118,15 @@ class ProductService implements ProductContact{
         }
     }
 
+    public function getProductByWhere($where, $column=['*'])
+    {
+        $response = $this->productRepository->getByWhere($column, $where);
+
+        return [
+            'data' => $response,
+            'success' => true,
+            'status' => 'success'
+        ];
+    }
+
 }

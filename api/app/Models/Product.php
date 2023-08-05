@@ -13,6 +13,9 @@ class Product extends Model
 
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
+
+    const FEATURED_ACTIVE = 1;
+    const FEATURED_INACTIVE = 0;
     
     protected $fillable = [
         'category_id',

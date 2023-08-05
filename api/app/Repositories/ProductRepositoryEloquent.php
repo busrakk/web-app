@@ -31,4 +31,9 @@ class ProductRepositoryEloquent implements ProductRepository{
         return Product::where('id', $id)->delete();
     }
 
+    public function getByWhere($column=['*'], $where)
+    {
+        return Product::select($column)->where($where)->get();
+    }
+
 }
